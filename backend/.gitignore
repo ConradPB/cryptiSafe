@@ -8,6 +8,7 @@ dist
 
 # misc
 package-lock.json
+pnpm-lock.yaml
 .DS_Store
 src/.DS_Store
 dist
