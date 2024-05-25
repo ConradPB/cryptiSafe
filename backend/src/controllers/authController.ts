@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-import User from '../models/User';
+import bcrypt from 'bcrypt';
+import User from '../models/user.js';
 
 // User registration
 export const register = async (req: Request, res: Response) => {

@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectToMongoDB, disconnectFromMongoDB } from './utils/db.js';
-import authRoutes from './routes/authRoutes';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 
