@@ -2,6 +2,7 @@ import express from 'express';
 import { register, login, getUserProfile } from '../controllers/authController.js';
 import { check } from 'express-validator';
 import auth from '../middleware/auth.js';
+import { createNearAccount, sendNearTransaction } from '../controllers/nearController.js';
 
 const router = express.Router();
 
@@ -17,5 +18,9 @@ router.post('/login', [
 ], login);
 
 router.get('/profile', auth, getUserProfile);
+
+// NEAR Account Routes
+router.post('/near/create-account', auth, createNearAccount);
+router.post('/near/send-transaction', auth, sendNearTransaction);
 
 export default router;
