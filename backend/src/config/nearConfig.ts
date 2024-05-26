@@ -1,4 +1,3 @@
-
 import { connect, KeyPair, keyStores, Near } from 'near-api-js';
 import dotenv from 'dotenv';
 
@@ -13,7 +12,7 @@ const nearConfig = {
   keyStore: new keyStores.InMemoryKeyStore(),
 };
 
-export const initializeNear = async () => {
+export const initializeNear = async (): Promise<Near> => {
   const keyStore = new keyStores.InMemoryKeyStore();
   const keyPair = KeyPair.fromString(process.env.NEAR_PRIVATE_KEY!);
   await keyStore.setKey(nearConfig.networkId, process.env.NEAR_MASTER_ACCOUNT!, keyPair);
@@ -23,3 +22,4 @@ export const initializeNear = async () => {
     keyStore,
   });
 };
+
