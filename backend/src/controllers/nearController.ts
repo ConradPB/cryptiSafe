@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { createAccount, sendTransaction } from '../services/nearService.js';
+import { sendTransaction } from '../services/nearService.js';
+import { createAccount } from '../services/createAccount.js';
 
 export const createNearAccount = async (req: Request, res: Response) => {
   try {

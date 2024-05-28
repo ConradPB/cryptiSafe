@@ -1,18 +1,16 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "target": "ES2022",
-    "sourceMap": true,
-    "outDir": "dist",
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    "baseUrl": "./",
-    "paths": {
-      "@near/*": ["node_modules/near-api-js/types/*"],
-    },
-    "allowSyntheticDefaultImports": true
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "outDir": "./dist"
   },
-    "types": ["node"],
-
-  "include": ["src/**/*.ts", "src/index.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

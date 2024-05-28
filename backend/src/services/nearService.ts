@@ -1,5 +1,4 @@
 import { connect, KeyPair, keyStores, utils, Near } from 'near-api-js';
-import BN from 'bn.js';
 
 const keyStore = new keyStores.InMemoryKeyStore();
 const nearConfig = {
@@ -26,7 +25,11 @@ export const createAccount = async (accountId: string) => {
   // Set the key pair in the key store
   await keyStore.setKey(nearConfig.networkId, accountId, newKeyPair);
 
-  const initialBalance = new BN(utils.format.parseNearAmount('1')!);  // Initial balance in NEAR tokens
+  const initialBalanceStr = utils.format.parseNearAmount('1');
+  if (!initialBalanceStr) {
+    throw new Error('Failed to parse initial balance');
+  }
+  const initialBalance = BigInt(initialBalanceStr);
 
   await masterAccount.createAccount(
     accountId,
@@ -36,7 +39,7 @@ export const createAccount = async (accountId: string) => {
 
   return {
     publicKey: newKeyPair.getPublicKey().toString(),
-    secretKey: newKeyPair.secretKey
+    secretKey: newKeyPair.secretKey // Correctly access the private key
   };
 };
 
@@ -44,9 +47,15 @@ export const sendTransaction = async (senderId: string, receiverId: string, amou
   const near = await initializeNear();
   const senderAccount = await near.account(senderId);
 
+  const amountStr = utils.format.parseNearAmount(amount);
+  if (!amountStr) {
+    throw new Error('Failed to parse amount');
+  }
+  const parsedAmount = BigInt(amountStr);
+
   const result = await senderAccount.sendMoney(
     receiverId,
-    new BN(utils.format.parseNearAmount(amount)!)
+    parsedAmount
   );
 
   return result.transaction_outcome.id;
